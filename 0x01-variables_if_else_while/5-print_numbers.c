@@ -1,20 +1,18 @@
 #include <stdio.h>
-
 /**
- * main - entry point for the program
- * Description: Print numbers using putchar
- * to the std output
- * Return: 0 (success)
- */
-
+* main - print if the number is postive, zero, or negative
+*
+* Description: using the main function
+* this program prints "Programming is positive, zero, or negative
+* Return: 0
+*/
 int main(void)
 {
-  char ch;
-
-  for (ch = '0'; ch <= '9'; ch++)
-    {
-      putchar(ch);
-    }
-  putchar('\n');
-  return (0);
+int i;
+for (i = 0; i < 10; i++)
+{
+printf("%i", i);
+}
+printf("\n");
+return (0);
 }
