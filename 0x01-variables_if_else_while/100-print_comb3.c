@@ -1,32 +1,24 @@
 #include <stdio.h>
 /**
- * main - program that prints all possible different combinations of 2 digits
- * Return: 0
- */
+* main - program that prints numbers from 0 to 99.
+* Return: 0
+*/
+
 int main(void)
 {
-  int c = 0;
-  int f_d;
-  int l_d;
+int c = 0;
 
-  while (c <= 99)
-    {
-      f_d = (c / 10 + '0'):
-      l_d = (c % 10 + '0');
-
-      if (f_d < l_d)
-	{
-	  putchar(f_d);
-	  putchar(l_d);
-
-	  if (c != 89)
-	    {
-	      putchar(',');
-	      putchar(' ');
-	    }
-	}
-      c++;
-    }
-  putchar('\n');
-  return (0);
+while (c <= 99)
+{
+putchar(c / 10 + '0');
+putchar(c % 10 + '0');
+if (c != 99)
+{
+putchar(',');
+putchar(' ');
+}
+c++;
+}
+putchar('\n');
+return (0);
 }
