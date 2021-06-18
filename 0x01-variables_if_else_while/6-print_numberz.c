@@ -1,18 +1,18 @@
 #include <stdio.h>
-
 /**
- * main - prints all single digit numbers of base
- * 10 starting from 0, followed by a new line
- * Return: Always 0 (Success)
- */
+* main - print if the number is postive, zero, or negative
+*
+* Description: using the main function
+* this program prints "Programming is positive, zero, or negative
+* Return: 0
+*/
 int main(void)
 {
-	int n;
-
-	for (n = 0; n < 10; n++)
-	{
-		putchar(n);
-	}
-	putchar('\n');
-	return (0);
+char c;
+for (c = '0'; c <= '9'; c++)
+{
+putchar(c);
+}
+putchar('\n');
+return (0);
 }
