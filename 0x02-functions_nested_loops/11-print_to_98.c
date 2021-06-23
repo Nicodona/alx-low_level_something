@@ -1,9 +1,6 @@
 #include "holberton.h"
 #include <stdio.h>
 /**
-#include "holberton.h"
-#include <stdio.h>
-/**
  * print_to_98 - entry to the function
  * @n: argument start of the counter
  */
@@ -38,3 +35,4 @@ void print_to_98(int n)
 	}
 	printf("\n");
 }
+
