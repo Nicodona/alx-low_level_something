@@ -25,4 +25,17 @@ int _abs(int);
 /* 7-print_last_digit.c */
 int print_last_digit(int);
 
+/* 8-24_hours.c */
+void jack_bauer(void);
+
+/* 9-times_table.c*/
+
+/* 10-add.c */
+int add(int, int);
+
+/* 11-print_to_98.c */
+void print_to_98(int n);
+
+/* 100-times_table.c */
+void print_times_table(int n);
 #endif
