@@ -1,1 +1,5 @@
-w,d
+#include<stdio.h>
+int main()
+{
+*/    */
+}
