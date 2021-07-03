@@ -1,46 +1,39 @@
 #include "holberton.h"
-#include <stdio.h>
-
 /**
- * simple_print_buffer - prints buffer in hexa
- * @buffer: the address of memory to print
- * @size: the size of the memory to print
- *
- * Return: Nothing.
+ * _strlen - returns the length of a string
+ * @str: a string of length to be returned
+ * Return: returns the length of a string
  */
-void simple_print_buffer(char *buffer, unsigned int size)
+int _strlen(char *str)
 {
-        unsigned int i;
+int length = 0;
 
-        i = 0;
-        while (i < size)
-        {
-                if (i % 10)
-                {
-                        printf(" ");
-                }
-                if (!(i % 10) && i)
-                {
-                        printf("\n");
-                }
-                printf("0x%02x", buffer[i]);
-                i++;
-        }
-        printf("\n");
+while (*str)
+{
+str++;
+length++;
 }
-
+return (length);
+}
 /**
- * main - check the code for Holberton School students.
- *
- * Return: Always 0.
+ * _strcat - concatenates two strings
+ * @dest: destination pointer
+ * @src: pointer to a string
+ * Return: concatenated string
  */
-int main(void)
+char *_strcat(char *dest, char *src)
 {
-	char buffer[98] = {0x00};
+char *cat = dest + _strlen(dest);
+int length = _strlen(dest) + _strlen(src);
 
-	simple_print_buffer(buffer, 98);
-	_memset(buffer, 0x01, 95);
-	printf("-------------------------------------------------\n");
-	simple_print_buffer(buffer, 98);    
-	return (0);
+while (*src)
+{
+*cat += *src;
+src++;
+cat++;
+}
+*cat += '\0';
+cat -= (length);
+*dest = *cat;
+return (cat);
 }
