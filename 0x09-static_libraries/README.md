@@ -1,3 +1,3 @@
 ## C - Static Libraries
-Create C static libraries
-_By Holberton School of Software Engineering_
+C static libraries one of the interesting things in C programming
+alx school 
