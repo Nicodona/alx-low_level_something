@@ -1,34 +1,46 @@
 #include "main.h"
-#include "holberton.h"
+
 /**
-* read_textfile - a function that reads a file text
-*and prints it to the POSIX standard output
-* @filename: name of file
-* @letters: the number of letters
-* Return: the actual number of letters or 0 if fails
-**/
+ * read_textfile - reads a text file and prints it to the standard output
+ * @filename: name of the file to be read
+ * @letters: number of letters to read and print
+ *
+ * Return: the number of letters printed, or 0 if it failed
+ */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-int f, length, i, res;
-char *buffer;
-if (filename == NULL)
-return (0);
-f = open(filename, O_RDONLY);
-if (f == -1)
-return (0);
-buffer = malloc(sizeof(char) * letters);
-if (!buffer)
-return (0);
-read(f, buffer, letters);
-buffer[letters] = '\0';
-for (i = 0; buffer[i] != '\0'; i += 1)
-length += 1;
-res = close(f);
-if (res != 0)
-exit(-1);
-res = write(STDOUT_FILENO, buffer, length);
-if (res != length)
-return (0);
-free(buffer);
-return (length);
+	int fd;
+	int s, t;
+	char *buf;
+
+	if (!filename)
+		return (0);
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
+
+	buf = malloc(sizeof(char) * letters);
+	if (!buf)
+		return (0);
+
+	s = read(fd, buf, letters);
+	if (s < 0)
+	{
+		free(buf);
+		return (0);
+	}
+	buf[s] = '\0';
+
+	close(fd);
+
+	t = write(STDOUT_FILENO, buf, s);
+	if (t < 0)
+	{
+		free(buf);
+		return (0);
+	}
+
+	free(buf);
+	return (t);
 }

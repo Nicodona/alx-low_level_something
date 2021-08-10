@@ -9,3 +9,4 @@
 --> the STDIN_FILENO is used to send information using the stadard input
 --> the STDERR_FILENO is used to display error
 --> when a new file is open its file descriptor is 0
+
