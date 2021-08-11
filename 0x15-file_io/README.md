@@ -10,3 +10,4 @@
 --> the STDERR_FILENO is used to display error
 --> when a new file is open its file descriptor is 0
 
+--> endif you are done reading
