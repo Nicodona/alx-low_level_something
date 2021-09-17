@@ -1,52 +1,159 @@
-#include "stdio.h"
-#include "stdlib.h"
-#include "string.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int f1(int len);
+int f2(char *name, int len);
+int f3(char *name, int len);
+int f4(char *name, int len);
+int f5(char *name, int len);
+int f6(char c);
+
 /**
- * main - keygen for crackme5
- * @argc: size of arguments
- * @argv: pointer to arguments
- * Return: 0 On Success -1 Failed
+ * main - entry point of crackme
+ * @ac: argument count
+ * @av: argument vector
+ *
+ * Return: always 0
  */
-
-int main(int argc __attribute__ ((unused)), char **argv)
+int main(int ac, char **av)
 {
-int c, size;
-char *str = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
-char *password;
-int f1, f2, f3, f4, f5, f6;
+	long str[] = {
+			0x3877445248432d41,
+			0x42394530534e6c37,
+			0x4d6e706762695432,
+			0x74767a5835737956,
+			0x2b554c59634a474f,
+			0x71786636576a6d34,
+			0x723161513346655a,
+			0x6b756f494b646850
+		};
+	char pass[7];
+	char *name = av[1];
+	int len = strlen(name);
+	int ret = ac;
 
-f1 = f2 = f5 = f6 = 0, f3 = 1;
-password = malloc(100);
-if (!password)
-return (-1);
-/* Define Char 1 */
-size = strlen(argv[1]);
-f1 = (size ^ 59) & 63;
-password[0] = str[f1];
-/* Define Char 2 */
-for (c = 0; c < size; c++)
-f2 += argv[1][c];
-password[1] = str[(f2 ^ 79) & 63];
-/* Define Char 3 */
-for (c = 0; c < size; c++)
-f3 *= argv[1][c];
-password[2] = str[(f3 ^ 85) & 63];
-/* Define Char 4 */
-for (c = 0; c < size; c++)
-if (argv[1][c] > f4)
-f4 = argv[1][c];
-srand(f4 ^ 14);
-f4 = rand(), f4 = f4 & 63;
-password[3] = str[f4];
-/* Define Char 5 */
-for (c = 0; c < size; c++)
-f5 += argv[1][c] * argv[1][c];
-password[4] = str[(f5 ^ 239) & 63];
-/* Define Char 6 */
-for (c = 0; c < argv[1][0]; c++)
-f6 = rand();
-password[5] = str[(f6 ^ 229) & 63];
-password[6] = '\0';
-printf("%s\n", password);
-return (0);
+	ret = f1(len);
+	pass[0] = ((char *)str)[ret];
+
+	ret = f2(name, len);
+	pass[1] = ((char *)str)[ret];
+
+	ret = f3(name, len);
+	pass[2] = ((char *)str)[ret];
+
+	ret = f4(name, len);
+	pass[3] = ((char *)str)[ret];
+
+	ret = f5(name, len);
+	pass[4] = ((char *)str)[ret];
+
+	ret = f6(name[0]);
+	pass[5] = ((char *)str)[ret];
+
+	pass[6] = 0;
+	printf("%s", pass);
+	return (0);
+}
+
+/**
+ * f1 - function for 1st char
+ * @len: length of name
+ *
+ * Return: encoded char
+ */
+int f1(int len)
+{
+	return ((len ^ 0x3b) & 0x3f);
+}
+
+/**
+ * f2 - function for 2nd char
+ * @name: the user name
+ * @len: length of name
+ *
+ * Return: encoded char
+ */
+int f2(char *name, int len)
+{
+	int ret = 0;
+	int i = 0;
+
+	for (; i < len; i++)
+		ret += name[i];
+
+	return ((ret ^ 0x4f) & 0x3f);
+}
+
+/**
+ * f3 - function for 3rd char
+ * @name: the user name
+ * @len: length of name
+ *
+ * Return: encoded char
+ */
+int f3(char *name, int len)
+{
+	int ret = 1;
+	int i = 0;
+
+	for (; i < len; i++)
+		ret *= name[i];
+
+	return ((ret ^ 0x55) & 0x3f);
+}
+
+/**
+ * f4 - function for 4th char
+ * @name: the user name
+ * @len: length of name
+ *
+ * Return: encoded char
+ */
+int f4(char *name, int len)
+{
+	int ret = name[0];
+	int i = 0;
+
+	for (; i < len; i++)
+		if (name[i] > ret)
+			ret = name[i];
+
+	srand(ret ^ 0xe);
+	return (rand() & 0x3f);
+}
+
+/**
+ * f5 - function for 5th char
+ * @name: the user name
+ * @len: length of name
+ *
+ * Return: encoded char
+ */
+int f5(char *name, int len)
+{
+	int ret = 0;
+	int i = 0;
+
+	for (; i < len; i++)
+		ret += name[i] * name[i];
+
+	return ((ret ^ 0xef) & 0x3f);
+}
+
+/**
+ * f6 - function for 6th char
+ * @c: first char of user name
+ *
+ * Return: encoded char
+ */
+int f6(char c)
+{
+	int ret = 0;
+	int i = 0;
+
+	for (; c > i; i++)
+		ret = rand();
+
+	return ((ret ^ 0xe5) & 0x3f);
 }
